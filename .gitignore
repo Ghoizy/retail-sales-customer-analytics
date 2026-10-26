@@ -15,3 +15,7 @@ data/processed/*
 # Local backups
 app_before_v2.py
 app_v1_backup.py
+
+# Local UI update backups
+app_before_*.py
+app_v1_backup.py
