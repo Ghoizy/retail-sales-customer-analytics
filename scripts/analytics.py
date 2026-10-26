@@ -32,7 +32,7 @@ def filter_lines(
     mask = (
         df["Country"].isin(selected_countries)
         & dates.ge(pd.Timestamp(date_from))
-        & dates.lt(pd.Timestamp(date_to) + pd.Timedelta(days=1))
+        & dates.lt(pd.Timestamp(date_to) + pd.offsets.Day(1))
     )
     return df.loc[mask].copy()
 

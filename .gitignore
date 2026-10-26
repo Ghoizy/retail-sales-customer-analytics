@@ -5,3 +5,13 @@ data/raw/*
 !data/raw/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+
+# Secrets, credentials, and local environment
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Local backups
+app_before_v2.py
+app_v1_backup.py

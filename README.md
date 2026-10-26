@@ -104,3 +104,13 @@ docs/CASE_STUDY.md            # portfolio narrative / findings
 ## Portfolio ethics
 
 Publish this as an **independent public-data case study**, not as a client project. With actual client work, obtain permission for data storage and disclosures, confirm retention/security rules, and agree on reconciliation definitions before quoting metrics.
+
+
+## Deploy the public dashboard (cloud bootstrap)
+
+Source records and processed files are excluded from Git. When the app runs on a new
+Streamlit Community Cloud instance, it downloads the **official UCI ZIP** and
+rebuilds processed datasets automatically; existing local data is reused.
+
+See [Cloud deployment guide](docs/CLOUD_DEPLOYMENT.md) for installation,
+Python 3.12 selection, deployment, and resource limitations.

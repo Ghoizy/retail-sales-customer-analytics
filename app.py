@@ -89,10 +89,21 @@ def load_processed(sales_mtime: int, quality_mtime: int, cancellation_mtime: int
 
 missing = [p.name for p in (SALES_PATH, CANCEL_PATH, QUALITY_PATH) if not p.exists()]
 if missing:
-    st.error("File hasil proses belum lengkap: " + ", ".join(missing))
-    st.code("..\\.venv\\Scripts\\python.exe -m scripts.prepare", language="powershell")
-    st.caption("Jalankan dari folder yang berisi app.py, setelah menaruh Online Retail.xlsx di data/raw/.")
-    st.stop()
+    from scripts.cloud_bootstrap import ensure_prepared_data
+
+    # Cached per server process: one download/preparation even with multiple viewers.
+    @st.cache_resource(show_spinner=False)
+    def initialize_source_data():
+        return ensure_prepared_data()
+
+    try:
+        with st.spinner("Preparing official UCI Online Retail data (first visit may take longer)..."):
+            initialize_source_data()
+    except Exception as exc:
+        st.error("Unable to prepare official UCI dataset for this server.")
+        st.caption("The source download can fail if UCI is offline or cloud resources are insufficient.")
+        st.code(f"{type(exc).__name__}: {exc}")
+        st.stop()
 
 sales, cancellations, quality = load_processed(
     SALES_PATH.stat().st_mtime_ns, QUALITY_PATH.stat().st_mtime_ns, CANCEL_PATH.stat().st_mtime_ns
