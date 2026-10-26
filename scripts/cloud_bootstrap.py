@@ -17,7 +17,7 @@ from pathlib import Path
 from scripts import prepare
 
 # Official direct link exposed by the Download button on the UCI dataset page.
-DATASET_ZIP_URL = "https://cdn.uci-ics-mlr-prod.aws.uci.edu/352/online%2Bretail.zip"
+DATASET_ZIP_URL = "https://archive.ics.uci.edu/static/public/352/online%2Bretail.zip"
 REQUIRED_OUTPUTS = ("sales_lines.csv", "cancellation_lines.csv", "data_quality.json")
 MAX_ZIP_BYTES = 60 * 1024 * 1024
 MAX_WORKBOOK_BYTES = 100 * 1024 * 1024
